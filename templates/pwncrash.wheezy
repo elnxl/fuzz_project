@@ -1,0 +1,165 @@
+@require(crash, exe, host, port, user, password, path, quiet, color)
+@(
+import sys
+from pathlib import PurePath, Path
+import json
+
+argv = list(sys.argv)
+argv[0] = PurePath(argv[0]).name
+
+try:
+    if crash:
+        jsonObject = json.load(Path(crash).open())
+except ValueError:
+    pass
+if not crash:        
+    crash = '../path/to/crash'
+    jsonObject = None
+ssh = user or password
+if ssh and not port:
+    port = 22
+elif host and not port:
+    port = 1337
+
+remote_path = path or exe
+password = password
+if not exe:
+    exe = '../path/to/exe'
+)\
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+@if not quiet:
+# This exploit template was generated via:
+# $ @argv[0]
+@endif
+
+from pwn import *
+@if not quiet:
+# Many built-in settings can be controlled on the 
+# command-line and show up in "args".
+# DEBUG, HOST, PORT, EXE, CRASH 
+@if host or port or user:
+# ./exploit.py HOST=example.com PORT=1337
+@endif
+@endif
+
+@if crash:
+crash = args.CRASH or '@crash!s'
+@endif
+@if exe:
+exe = ELF(args.EXE or '@exe!s')
+@endif
+@if host:
+host = args.HOST or '@host!s'
+@endif
+@if port:
+port = int(args.PORT or @port!s)
+@endif
+@if user:
+user = args.USER or @user!s
+password = args.PASSWORD or @password!s
+@endif
+@if ssh:
+remote_path = @remote_path!s
+@endif
+@if ssh:
+# Connect to the remote SSH server
+shell = None
+if not args.LOCAL:
+    shell = ssh(user, host, port, password)
+    shell.set_working_directory(symlink=True)
+@endif
+
+@if host:
+def start_local(argv=[], *a, **kw):
+    '''Execute the target binary locally'''
+    if args.GDB:
+        return gdb.debug([exe.path] + argv, gdbscript=gdbscript, *a, **kw)
+    else:
+        return process([exe.path] + argv, *a, **kw)
+
+def start_remote(argv=[], *a, **kw):
+@if ssh:
+    '''Execute the target binary on the remote host'''
+    if args.GDB:
+        return gdb.debug([remote_path] + argv, gdbscript=gdbscript, ssh=shell, *a, **kw)
+    else:
+        return shell.process([remote_path] + argv, *a, **kw)
+@else:
+    '''Connect to the process on the remote host'''
+    io = connect(host, port)
+    if args.GDB:
+        gdb.attach(io, gdbscript=gdbscript)
+    return io
+    @endif
+@endif
+@if host:
+def start(argv=[], *a, **kw):
+    '''Start the exploit against the target.'''
+    if args.LOCAL:
+        return start_local(argv, *a, **kw)
+    else:
+        return start_remote(argv, *a, **kw)
+@else:
+def start(argv=[], *a, **kw):
+    '''Start the exploit against the target.'''
+    if args.GDB:
+        return gdb.debug([exe.path] + argv, gdbscript=gdbscript, *a, **kw)
+    else:
+        return process([exe.path] + argv, *a, **kw)
+@endif
+@if not quiet:
+# Specify your GDB script here for debugging
+# GDB will be launched if the exploit is run via e.g.
+# ./exploit.py GDB
+@endif
+gdbscript = '''
+'''.format(**locals())
+
+@if not quiet:
+#===========================================================
+#                    EXPLOIT GOES HERE
+#===========================================================
+@else:
+# -- Exploit goes here --
+@endif
+
+# EXTARCTED DATA FROM JSON
+
+@def print_dict(data):
+@#ignore
+@for key, val in data.items():
+@if key == 'registers state' or key == 'file':
+# [+] @key!s
+    @for key_in, val_in in val.items():
+    # @key_in!s = @val_in!s
+    @endfor
+@else:
+# @key!s = @val!s
+@endif
+@endfor
+@end
+\
+@def inside (data):
+@#ignore
+@for el in data:
+@(try:)@print_dict(el)
+@#ignore
+@(except AttributeError:)@inside(el)
+@endfor
+@end
+\
+@inside(jsonObject)\
+\
+io = start()
+
+@if not quiet:
+# payload = b''
+# payload += b'0xdeadbeef'
+# payload.ljust(48, b'_')
+# io.send(payload)
+# flag = io.recvline()
+# log.success(flag)
+@endif
+
+io.interactive()

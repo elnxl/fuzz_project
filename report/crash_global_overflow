@@ -1,0 +1,61 @@
+INFO: Seed: 3478208397
+INFO: Loaded 1 modules   (2 inline 8-bit counters): 2 [0x5abf10, 0x5abf12), 
+INFO: Loaded 1 PC tables (2 PCs): 2 [0x56f890,0x56f8b0), 
+INFO: -max_len is not provided; libFuzzer will not generate inputs larger than 4096 bytes
+INFO: A corpus is not provided, starting from an empty corpus
+#2	INITED cov: 2 ft: 2 corp: 1/1b exec/s: 0 rss: 31Mb
+=================================================================
+==9458==ERROR: AddressSanitizer: global-buffer-overflow on address 0x000000f073d0 at pc 0x00000052185a bp 0x7ffc8d7ddad0 sp 0x7ffc8d7dd298
+WRITE of size 82 at 0x000000f073d0 thread T0
+    #0 0x521859 in __asan_memcpy (/mnt/hgfs/f/DSEC/fuzzer/global_overflow/global_overflow+0x521859)
+    #1 0x55493a in global_overflow(unsigned char const*, unsigned long) /mnt/hgfs/f/DSEC/fuzzer/global_overflow/global_overflow.cpp:9:5
+    #2 0x5549b4 in LLVMFuzzerTestOneInput /mnt/hgfs/f/DSEC/fuzzer/global_overflow/global_overflow.cpp:14:5
+    #3 0x45b691 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) (/mnt/hgfs/f/DSEC/fuzzer/global_overflow/global_overflow+0x45b691)
+    #4 0x45add5 in fuzzer::Fuzzer::RunOne(unsigned char const*, unsigned long, bool, fuzzer::InputInfo*, bool*) (/mnt/hgfs/f/DSEC/fuzzer/global_overflow/global_overflow+0x45add5)
+    #5 0x45c800 in fuzzer::Fuzzer::MutateAndTestOne() (/mnt/hgfs/f/DSEC/fuzzer/global_overflow/global_overflow+0x45c800)
+    #6 0x45d275 in fuzzer::Fuzzer::Loop(std::__Fuzzer::vector<fuzzer::SizedFile, fuzzer::fuzzer_allocator<fuzzer::SizedFile> >&) (/mnt/hgfs/f/DSEC/fuzzer/global_overflow/global_overflow+0x45d275)
+    #7 0x44cc85 in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) (/mnt/hgfs/f/DSEC/fuzzer/global_overflow/global_overflow+0x44cc85)
+    #8 0x4748d2 in main (/mnt/hgfs/f/DSEC/fuzzer/global_overflow/global_overflow+0x4748d2)
+    #9 0x7f89aabeed09 in __libc_start_main csu/../csu/libc-start.c:308:16
+    #10 0x4214a9 in _start (/mnt/hgfs/f/DSEC/fuzzer/global_overflow/global_overflow+0x4214a9)
+
+0x000000f073d0 is located 0 bytes to the right of global variable 'global_array' defined in 'global_overflow.cpp:5:5' (0xf07380) of size 80
+SUMMARY: AddressSanitizer: global-buffer-overflow (/mnt/hgfs/f/DSEC/fuzzer/global_overflow/global_overflow+0x521859) in __asan_memcpy
+Shadow bytes around the buggy address:
+  0x0000801d8e20: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0000801d8e30: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0000801d8e40: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0000801d8e50: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0000801d8e60: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+=>0x0000801d8e70: 00 00 00 00 00 00 00 00 00 00[f9]f9 f9 f9 f9 f9
+  0x0000801d8e80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0000801d8e90: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0000801d8ea0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0000801d8eb0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0000801d8ec0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+  Shadow gap:              cc
+==9458==ABORTING
+MS: 4 InsertRepeatedBytes-InsertRepeatedBytes-ChangeBinInt-CopyPart-; base unit: adc83b19e793491b1c6ea0fd8b46cd9f32e592fc
+0x4a,0x4a,0x4a,0x4a,0x4a,0x4a,0x4a,0x4a,0x4a,0x4a,0x4a,0x4a,0x4a,0x4a,0x4a,0x4a,0x4a,0x4a,0x4a,0x4a,0x4a,0x4a,0x4a,0x4a,0x4a,0x4a,0x4a,0x4a,0x4a,0xb6,0x4a,0x4a,0x4a,0x4a,0x4a,0x4a,0x4a,0x4a,0x4a,0x4a,0x4a,0x4a,0x4a,0xb6,0xb5,0xb5,0xb5,0xb5,0xb5,0xb5,0xbc,0x4a,0x4a,0x4a,0x4a,0x4a,0x40,0x40,0x40,0x40,0x4a,0x4a,0x4a,0x4a,0x4a,0x4a,0x4a,0x4a,0x4a,0x4a,0x4a,0x4a,0x4a,0x4a,0x4a,0x4a,0x4a,0x4a,0x4a,0x4a,0x4a,0xa,
+JJJJJJJJJJJJJJJJJJJJJJJJJJJJJ\xb6JJJJJJJJJJJJJ\xb6\xb5\xb5\xb5\xb5\xb5\xb5\xbcJJJJJ@@@@JJJJJJJJJJJJJJJJJJJJJ\x0a
+artifact_prefix='./'; Test unit written to ./crash-0ac00071d22b07608d373ccaf4b6cb8223ce593d
+Base64: SkpKSkpKSkpKSkpKSkpKSkpKSkpKSkpKSkpKSkq2SkpKSkpKSkpKSkpKSra1tbW1tbW8SkpKSkpAQEBASkpKSkpKSkpKSkpKSkpKSkpKSkpKCg==

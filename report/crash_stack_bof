@@ -1,0 +1,64 @@
+INFO: Seed: 3478611085
+INFO: Loaded 1 modules   (2 inline 8-bit counters): 2 [0x5abed0, 0x5abed2), 
+INFO: Loaded 1 PC tables (2 PCs): 2 [0x56f858,0x56f878), 
+INFO: -max_len is not provided; libFuzzer will not generate inputs larger than 4096 bytes
+INFO: A corpus is not provided, starting from an empty corpus
+#2	INITED cov: 2 ft: 2 corp: 1/1b exec/s: 0 rss: 30Mb
+=================================================================
+==9470==ERROR: AddressSanitizer: stack-buffer-overflow on address 0x7fff8f4f1830 at pc 0x00000052185a bp 0x7fff8f4f1670 sp 0x7fff8f4f0e38
+WRITE of size 405 at 0x7fff8f4f1830 thread T0
+    #0 0x521859 in __asan_memcpy (/mnt/hgfs/f/DSEC/fuzzer/stack_bof/stack_bof+0x521859)
+    #1 0x554a61 in bof(unsigned char const*, unsigned long) /mnt/hgfs/f/DSEC/fuzzer/stack_bof/stack_bof.cc:8:5
+    #2 0x554b74 in LLVMFuzzerTestOneInput /mnt/hgfs/f/DSEC/fuzzer/stack_bof/stack_bof.cc:13:5
+    #3 0x45b691 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) (/mnt/hgfs/f/DSEC/fuzzer/stack_bof/stack_bof+0x45b691)
+    #4 0x45add5 in fuzzer::Fuzzer::RunOne(unsigned char const*, unsigned long, bool, fuzzer::InputInfo*, bool*) (/mnt/hgfs/f/DSEC/fuzzer/stack_bof/stack_bof+0x45add5)
+    #5 0x45c800 in fuzzer::Fuzzer::MutateAndTestOne() (/mnt/hgfs/f/DSEC/fuzzer/stack_bof/stack_bof+0x45c800)
+    #6 0x45d275 in fuzzer::Fuzzer::Loop(std::__Fuzzer::vector<fuzzer::SizedFile, fuzzer::fuzzer_allocator<fuzzer::SizedFile> >&) (/mnt/hgfs/f/DSEC/fuzzer/stack_bof/stack_bof+0x45d275)
+    #7 0x44cc85 in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) (/mnt/hgfs/f/DSEC/fuzzer/stack_bof/stack_bof+0x44cc85)
+    #8 0x4748d2 in main (/mnt/hgfs/f/DSEC/fuzzer/stack_bof/stack_bof+0x4748d2)
+    #9 0x7f58d4fedd09 in __libc_start_main csu/../csu/libc-start.c:308:16
+    #10 0x4214a9 in _start (/mnt/hgfs/f/DSEC/fuzzer/stack_bof/stack_bof+0x4214a9)
+
+Address 0x7fff8f4f1830 is located in stack of thread T0 at offset 432 in frame
+    #0 0x5548cf in bof(unsigned char const*, unsigned long) /mnt/hgfs/f/DSEC/fuzzer/stack_bof/stack_bof.cc:6
+
+  This frame has 1 object(s):
+    [32, 432) 'stack_array' (line 7) <== Memory access at offset 432 overflows this variable
+HINT: this may be a false positive if your program uses some custom stack unwind mechanism, swapcontext or vfork
+      (longjmp and C++ exceptions *are* supported)
+SUMMARY: AddressSanitizer: stack-buffer-overflow (/mnt/hgfs/f/DSEC/fuzzer/stack_bof/stack_bof+0x521859) in __asan_memcpy
+Shadow bytes around the buggy address:
+  0x100071e962b0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x100071e962c0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x100071e962d0: f1 f1 f1 f1 00 00 00 00 00 00 00 00 00 00 00 00
+  0x100071e962e0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x100071e962f0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+=>0x100071e96300: 00 00 00 00 00 00[f3]f3 f3 f3 f3 f3 f3 f3 f3 f3
+  0x100071e96310: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x100071e96320: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x100071e96330: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x100071e96340: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x100071e96350: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+  Shadow gap:              cc
+==9470==ABORTING
+MS: 3 InsertByte-EraseBytes-CrossOver-; base unit: adc83b19e793491b1c6ea0fd8b46cd9f32e592fc
+artifact_prefix='./'; Test unit written to ./crash-977aeb5f9d63cd35e5c629ea907187df60a0a697

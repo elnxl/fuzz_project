@@ -1,0 +1,65 @@
+INFO: Seed: 3478911218
+INFO: Loaded 1 modules   (4 inline 8-bit counters): 4 [0x5abf10, 0x5abf14), 
+INFO: Loaded 1 PC tables (4 PCs): 4 [0x56f868,0x56f8a8), 
+INFO: -max_len is not provided; libFuzzer will not generate inputs larger than 4096 bytes
+INFO: A corpus is not provided, starting from an empty corpus
+=================================================================
+==9476==ERROR: AddressSanitizer: stack-use-after-scope on address 0x7ffdad67d9c0 at pc 0x000000554b42 bp 0x7ffdad67d990 sp 0x7ffdad67d988
+WRITE of size 4 at 0x7ffdad67d9c0 thread T0
+    #0 0x554b41 in uas(unsigned char const*, unsigned long) /mnt/hgfs/f/DSEC/fuzzer/uas/uas.cpp:13:24
+    #1 0x554c04 in LLVMFuzzerTestOneInput /mnt/hgfs/f/DSEC/fuzzer/uas/uas.cpp:18:5
+    #2 0x45b691 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) (/mnt/hgfs/f/DSEC/fuzzer/uas/uas+0x45b691)
+    #3 0x45add5 in fuzzer::Fuzzer::RunOne(unsigned char const*, unsigned long, bool, fuzzer::InputInfo*, bool*) (/mnt/hgfs/f/DSEC/fuzzer/uas/uas+0x45add5)
+    #4 0x45ccea in fuzzer::Fuzzer::ReadAndExecuteSeedCorpora(std::__Fuzzer::vector<fuzzer::SizedFile, fuzzer::fuzzer_allocator<fuzzer::SizedFile> >&) (/mnt/hgfs/f/DSEC/fuzzer/uas/uas+0x45ccea)
+    #5 0x45cf79 in fuzzer::Fuzzer::Loop(std::__Fuzzer::vector<fuzzer::SizedFile, fuzzer::fuzzer_allocator<fuzzer::SizedFile> >&) (/mnt/hgfs/f/DSEC/fuzzer/uas/uas+0x45cf79)
+    #6 0x44cc85 in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) (/mnt/hgfs/f/DSEC/fuzzer/uas/uas+0x44cc85)
+    #7 0x4748d2 in main (/mnt/hgfs/f/DSEC/fuzzer/uas/uas+0x4748d2)
+    #8 0x7f44bc5c3d09 in __libc_start_main csu/../csu/libc-start.c:308:16
+    #9 0x4214a9 in _start (/mnt/hgfs/f/DSEC/fuzzer/uas/uas+0x4214a9)
+
+Address 0x7ffdad67d9c0 is located in stack of thread T0 at offset 32 in frame
+    #0 0x55490f in uas(unsigned char const*, unsigned long) /mnt/hgfs/f/DSEC/fuzzer/uas/uas.cpp:8
+
+  This frame has 1 object(s):
+    [32, 36) 'n' (line 10) <== Memory access at offset 32 is inside this variable
+HINT: this may be a false positive if your program uses some custom stack unwind mechanism, swapcontext or vfork
+      (longjmp and C++ exceptions *are* supported)
+SUMMARY: AddressSanitizer: stack-use-after-scope /mnt/hgfs/f/DSEC/fuzzer/uas/uas.cpp:13:24 in uas(unsigned char const*, unsigned long)
+Shadow bytes around the buggy address:
+  0x100035ac7ae0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x100035ac7af0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x100035ac7b00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x100035ac7b10: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x100035ac7b20: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+=>0x100035ac7b30: 00 00 00 00 f1 f1 f1 f1[f8]f3 f3 f3 00 00 00 00
+  0x100035ac7b40: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x100035ac7b50: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x100035ac7b60: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x100035ac7b70: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x100035ac7b80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+  Shadow gap:              cc
+==9476==ABORTING
+MS: 0 ; base unit: 0000000000000000000000000000000000000000
+0xa,
+\x0a
+artifact_prefix='./'; Test unit written to ./crash-adc83b19e793491b1c6ea0fd8b46cd9f32e592fc
+Base64: Cg==

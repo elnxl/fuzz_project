@@ -1,0 +1,72 @@
+INFO: Seed: 3478332258
+INFO: Loaded 1 modules   (6 inline 8-bit counters): 6 [0x5abed0, 0x5abed6), 
+INFO: Loaded 1 PC tables (6 PCs): 6 [0x56f840,0x56f8a0), 
+INFO: -max_len is not provided; libFuzzer will not generate inputs larger than 4096 bytes
+INFO: A corpus is not provided, starting from an empty corpus
+#2	INITED cov: 4 ft: 5 corp: 1/1b exec/s: 0 rss: 31Mb
+=================================================================
+==9461==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x604000003738 at pc 0x000000554a72 bp 0x7ffe9f593480 sp 0x7ffe9f593478
+READ of size 4 at 0x604000003738 thread T0
+    #0 0x554a71 in heap_overflow(unsigned char const*, unsigned long) /mnt/hgfs/f/DSEC/fuzzer/heap_overflow/hof.cpp:14:19
+    #1 0x554b34 in LLVMFuzzerTestOneInput /mnt/hgfs/f/DSEC/fuzzer/heap_overflow/hof.cpp:23:5
+    #2 0x45b691 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) (/mnt/hgfs/f/DSEC/fuzzer/heap_overflow/hof+0x45b691)
+    #3 0x45add5 in fuzzer::Fuzzer::RunOne(unsigned char const*, unsigned long, bool, fuzzer::InputInfo*, bool*) (/mnt/hgfs/f/DSEC/fuzzer/heap_overflow/hof+0x45add5)
+    #4 0x45c800 in fuzzer::Fuzzer::MutateAndTestOne() (/mnt/hgfs/f/DSEC/fuzzer/heap_overflow/hof+0x45c800)
+    #5 0x45d275 in fuzzer::Fuzzer::Loop(std::__Fuzzer::vector<fuzzer::SizedFile, fuzzer::fuzzer_allocator<fuzzer::SizedFile> >&) (/mnt/hgfs/f/DSEC/fuzzer/heap_overflow/hof+0x45d275)
+    #6 0x44cc85 in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) (/mnt/hgfs/f/DSEC/fuzzer/heap_overflow/hof+0x44cc85)
+    #7 0x4748d2 in main (/mnt/hgfs/f/DSEC/fuzzer/heap_overflow/hof+0x4748d2)
+    #8 0x7f4e97929d09 in __libc_start_main csu/../csu/libc-start.c:308:16
+    #9 0x4214a9 in _start (/mnt/hgfs/f/DSEC/fuzzer/heap_overflow/hof+0x4214a9)
+
+0x604000003738 is located 0 bytes to the right of 40-byte region [0x604000003710,0x604000003738)
+allocated by thread T0 here:
+    #0 0x5520dd in operator new[](unsigned long) (/mnt/hgfs/f/DSEC/fuzzer/heap_overflow/hof+0x5520dd)
+    #1 0x554924 in heap_overflow(unsigned char const*, unsigned long) /mnt/hgfs/f/DSEC/fuzzer/heap_overflow/hof.cpp:8:18
+    #2 0x554b34 in LLVMFuzzerTestOneInput /mnt/hgfs/f/DSEC/fuzzer/heap_overflow/hof.cpp:23:5
+    #3 0x45b691 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) (/mnt/hgfs/f/DSEC/fuzzer/heap_overflow/hof+0x45b691)
+    #4 0x45add5 in fuzzer::Fuzzer::RunOne(unsigned char const*, unsigned long, bool, fuzzer::InputInfo*, bool*) (/mnt/hgfs/f/DSEC/fuzzer/heap_overflow/hof+0x45add5)
+    #5 0x45c800 in fuzzer::Fuzzer::MutateAndTestOne() (/mnt/hgfs/f/DSEC/fuzzer/heap_overflow/hof+0x45c800)
+    #6 0x45d275 in fuzzer::Fuzzer::Loop(std::__Fuzzer::vector<fuzzer::SizedFile, fuzzer::fuzzer_allocator<fuzzer::SizedFile> >&) (/mnt/hgfs/f/DSEC/fuzzer/heap_overflow/hof+0x45d275)
+    #7 0x44cc85 in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) (/mnt/hgfs/f/DSEC/fuzzer/heap_overflow/hof+0x44cc85)
+    #8 0x4748d2 in main (/mnt/hgfs/f/DSEC/fuzzer/heap_overflow/hof+0x4748d2)
+    #9 0x7f4e97929d09 in __libc_start_main csu/../csu/libc-start.c:308:16
+
+SUMMARY: AddressSanitizer: heap-buffer-overflow /mnt/hgfs/f/DSEC/fuzzer/heap_overflow/hof.cpp:14:19 in heap_overflow(unsigned char const*, unsigned long)
+Shadow bytes around the buggy address:
+  0x0c087fff8690: fa fa fd fd fd fd fd fa fa fa fd fd fd fd fd fa
+  0x0c087fff86a0: fa fa fd fd fd fd fd fa fa fa fd fd fd fd fd fa
+  0x0c087fff86b0: fa fa fd fd fd fd fd fa fa fa fd fd fd fd fd fa
+  0x0c087fff86c0: fa fa fd fd fd fd fd fa fa fa fd fd fd fd fd fa
+  0x0c087fff86d0: fa fa fd fd fd fd fd fa fa fa fd fd fd fd fd fa
+=>0x0c087fff86e0: fa fa 00 00 00 00 00[fa]fa fa fa fa fa fa fa fa
+  0x0c087fff86f0: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c087fff8700: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c087fff8710: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c087fff8720: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c087fff8730: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+  Shadow gap:              cc
+==9461==ABORTING
+MS: 4 InsertByte-ChangeByte-CopyPart-CrossOver-; base unit: adc83b19e793491b1c6ea0fd8b46cd9f32e592fc
+0xa,0xa,0xa,0xa,0xa,0x0,
+\x0a\x0a\x0a\x0a\x0a\x00
+artifact_prefix='./'; Test unit written to ./crash-284a0e56052294badbcf17a8f48c45d57df321b2
+Base64: CgoKCgoA

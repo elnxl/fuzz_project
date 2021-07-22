@@ -1,0 +1,79 @@
+INFO: Seed: 3478779759
+INFO: Loaded 1 modules   (4 inline 8-bit counters): 4 [0x5abed0, 0x5abed4), 
+INFO: Loaded 1 PC tables (4 PCs): 4 [0x56f840,0x56f880), 
+INFO: -max_len is not provided; libFuzzer will not generate inputs larger than 4096 bytes
+=================================================================
+==9473==ERROR: AddressSanitizer: heap-use-after-free on address 0x614000000040 at pc 0x0000005549d4 bp 0x7ffcccc7e980 sp 0x7ffcccc7e978
+READ of size 4 at 0x614000000040 thread T0
+    #0 0x5549d3 in uaf(unsigned char const*, unsigned long) /mnt/hgfs/f/DSEC/fuzzer/uaf/uaf.cc:12:12
+    #1 0x554a54 in LLVMFuzzerTestOneInput /mnt/hgfs/f/DSEC/fuzzer/uaf/uaf.cc:17:5
+    #2 0x45b691 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) (/mnt/hgfs/f/DSEC/fuzzer/uaf/uaf+0x45b691)
+    #3 0x45cb06 in fuzzer::Fuzzer::ReadAndExecuteSeedCorpora(std::__Fuzzer::vector<fuzzer::SizedFile, fuzzer::fuzzer_allocator<fuzzer::SizedFile> >&) (/mnt/hgfs/f/DSEC/fuzzer/uaf/uaf+0x45cb06)
+    #4 0x45cf79 in fuzzer::Fuzzer::Loop(std::__Fuzzer::vector<fuzzer::SizedFile, fuzzer::fuzzer_allocator<fuzzer::SizedFile> >&) (/mnt/hgfs/f/DSEC/fuzzer/uaf/uaf+0x45cf79)
+    #5 0x44cc85 in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) (/mnt/hgfs/f/DSEC/fuzzer/uaf/uaf+0x44cc85)
+    #6 0x4748d2 in main (/mnt/hgfs/f/DSEC/fuzzer/uaf/uaf+0x4748d2)
+    #7 0x7f8056e18d09 in __libc_start_main csu/../csu/libc-start.c:308:16
+    #8 0x4214a9 in _start (/mnt/hgfs/f/DSEC/fuzzer/uaf/uaf+0x4214a9)
+
+0x614000000040 is located 0 bytes inside of 400-byte region [0x614000000040,0x6140000001d0)
+freed by thread T0 here:
+    #0 0x55292d in operator delete[](void*) (/mnt/hgfs/f/DSEC/fuzzer/uaf/uaf+0x55292d)
+    #1 0x55498e in uaf(unsigned char const*, unsigned long) /mnt/hgfs/f/DSEC/fuzzer/uaf/uaf.cc:10:5
+    #2 0x554a54 in LLVMFuzzerTestOneInput /mnt/hgfs/f/DSEC/fuzzer/uaf/uaf.cc:17:5
+    #3 0x45b691 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) (/mnt/hgfs/f/DSEC/fuzzer/uaf/uaf+0x45b691)
+    #4 0x45cb06 in fuzzer::Fuzzer::ReadAndExecuteSeedCorpora(std::__Fuzzer::vector<fuzzer::SizedFile, fuzzer::fuzzer_allocator<fuzzer::SizedFile> >&) (/mnt/hgfs/f/DSEC/fuzzer/uaf/uaf+0x45cb06)
+    #5 0x45cf79 in fuzzer::Fuzzer::Loop(std::__Fuzzer::vector<fuzzer::SizedFile, fuzzer::fuzzer_allocator<fuzzer::SizedFile> >&) (/mnt/hgfs/f/DSEC/fuzzer/uaf/uaf+0x45cf79)
+    #6 0x44cc85 in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) (/mnt/hgfs/f/DSEC/fuzzer/uaf/uaf+0x44cc85)
+    #7 0x4748d2 in main (/mnt/hgfs/f/DSEC/fuzzer/uaf/uaf+0x4748d2)
+    #8 0x7f8056e18d09 in __libc_start_main csu/../csu/libc-start.c:308:16
+
+previously allocated by thread T0 here:
+    #0 0x5520dd in operator new[](unsigned long) (/mnt/hgfs/f/DSEC/fuzzer/uaf/uaf+0x5520dd)
+    #1 0x554921 in uaf(unsigned char const*, unsigned long) /mnt/hgfs/f/DSEC/fuzzer/uaf/uaf.cc:7:18
+    #2 0x554a54 in LLVMFuzzerTestOneInput /mnt/hgfs/f/DSEC/fuzzer/uaf/uaf.cc:17:5
+    #3 0x45b691 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) (/mnt/hgfs/f/DSEC/fuzzer/uaf/uaf+0x45b691)
+    #4 0x45cb06 in fuzzer::Fuzzer::ReadAndExecuteSeedCorpora(std::__Fuzzer::vector<fuzzer::SizedFile, fuzzer::fuzzer_allocator<fuzzer::SizedFile> >&) (/mnt/hgfs/f/DSEC/fuzzer/uaf/uaf+0x45cb06)
+    #5 0x45cf79 in fuzzer::Fuzzer::Loop(std::__Fuzzer::vector<fuzzer::SizedFile, fuzzer::fuzzer_allocator<fuzzer::SizedFile> >&) (/mnt/hgfs/f/DSEC/fuzzer/uaf/uaf+0x45cf79)
+    #6 0x44cc85 in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) (/mnt/hgfs/f/DSEC/fuzzer/uaf/uaf+0x44cc85)
+    #7 0x4748d2 in main (/mnt/hgfs/f/DSEC/fuzzer/uaf/uaf+0x4748d2)
+    #8 0x7f8056e18d09 in __libc_start_main csu/../csu/libc-start.c:308:16
+
+SUMMARY: AddressSanitizer: heap-use-after-free /mnt/hgfs/f/DSEC/fuzzer/uaf/uaf.cc:12:12 in uaf(unsigned char const*, unsigned long)
+Shadow bytes around the buggy address:
+  0x0c287fff7fb0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c287fff7fc0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c287fff7fd0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c287fff7fe0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0c287fff7ff0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+=>0x0c287fff8000: fa fa fa fa fa fa fa fa[fd]fd fd fd fd fd fd fd
+  0x0c287fff8010: fd fd fd fd fd fd fd fd fd fd fd fd fd fd fd fd
+  0x0c287fff8020: fd fd fd fd fd fd fd fd fd fd fd fd fd fd fd fd
+  0x0c287fff8030: fd fd fd fd fd fd fd fd fd fd fa fa fa fa fa fa
+  0x0c287fff8040: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x0c287fff8050: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+  Shadow gap:              cc
+==9473==ABORTING
+MS: 0 ; base unit: 0000000000000000000000000000000000000000
+
+
+artifact_prefix='./'; Test unit written to ./crash-da39a3ee5e6b4b0d3255bfef95601890afd80709
+Base64: 

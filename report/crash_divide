@@ -1,0 +1,16 @@
+INFO: Seed: 3478178938
+INFO: Loaded 1 modules   (5 inline 8-bit counters): 5 [0x4eb088, 0x4eb08d), 
+INFO: Loaded 1 PC tables (5 PCs): 5 [0x4c1078,0x4c10c8), 
+INFO: -max_len is not provided; libFuzzer will not generate inputs larger than 4096 bytes
+INFO: A corpus is not provided, starting from an empty corpus
+#2	INITED cov: 4 ft: 5 corp: 1/1b exec/s: 0 rss: 30Mb
+#3	NEW    cov: 4 ft: 6 corp: 2/3b lim: 4 exec/s: 0 rss: 30Mb L: 2/2 MS: 1 InsertByte-
+#7	NEW    cov: 4 ft: 7 corp: 3/6b lim: 4 exec/s: 0 rss: 30Mb L: 3/3 MS: 4 InsertByte-ChangeBinInt-ChangeBinInt-InsertByte-
+#10	NEW    cov: 4 ft: 8 corp: 4/10b lim: 4 exec/s: 0 rss: 30Mb L: 4/4 MS: 3 CrossOver-ChangeBit-CrossOver-
+divide.cpp:8:11: runtime error: division by zero
+SUMMARY: UndefinedBehaviorSanitizer: undefined-behavior divide.cpp:8:11 in 
+MS: 4 InsertByte-ChangeBinInt-CrossOver-CMP- DE: "\x01\x00\x00\x00"-; base unit: 3684bfc41e95922ace451493d8c72c4b253df2d7
+0x1,0x0,0x0,0x0,
+\x01\x00\x00\x00
+artifact_prefix='./'; Test unit written to ./crash-3c585604e87f855973731fea83e21fab9392d2fc
+Base64: AQAAAA==

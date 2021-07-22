@@ -1,38 +1,107 @@
 [
-    {
-        "sanitizer": "AddressSanitizer",
-        "error type": "heap-use-after-free",
-        "error address": "0x614000000040",
-        "registers state": {
-            "pc": "0x0000005549d4",
-            "bp": "0x7ffcccc7e980",
-            "sp": "0x7ffcccc7e978"
-        }
-    },
     [
+        {
+            "sanitizer": "AddressSanitizer",
+            "error type": "heap-buffer-overflow",
+            "error address": "0x604000003738",
+            "registers state": {
+                "pc": "0x000000554a72",
+                "bp": "0x7ffe9f593480",
+                "sp": "0x7ffe9f593478"
+            }
+        },
+        {
+            "type": "sanitizer header",
+            "operation": "READ",
+            "size": "4",
+            "address": "0x604000003738",
+            "thread": "T0"
+        },
+        {
+            "address": "0x554a71",
+            "function": "heap_overflow(unsigned char const*, unsigned long)",
+            "file": {
+                "path": "/mnt/hgfs/f/DSEC/fuzzer/heap_overflow/hof.cpp",
+                "line": 14,
+                "position": 19
+            }
+        },
+        {
+            "address": "0x554b34",
+            "function": "LLVMFuzzerTestOneInput",
+            "file": {
+                "path": "/mnt/hgfs/f/DSEC/fuzzer/heap_overflow/hof.cpp",
+                "line": 23,
+                "position": 5
+            }
+        },
+        {
+            "address": "0x45b691",
+            "function": "fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long)"
+        },
+        {
+            "address": "0x45add5",
+            "function": "fuzzer::Fuzzer::RunOne(unsigned char const*, unsigned long, bool, fuzzer::InputInfo*, bool*)"
+        },
+        {
+            "address": "0x45c800",
+            "function": "fuzzer::Fuzzer::MutateAndTestOne()"
+        },
+        {
+            "address": "0x45d275",
+            "function": "fuzzer::Fuzzer::Loop(std::__Fuzzer::vector<fuzzer::SizedFile, fuzzer::fuzzer_allocator<fuzzer::SizedFile> >&)"
+        },
+        {
+            "address": "0x44cc85",
+            "function": "fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long))"
+        },
+        {
+            "address": "0x4748d2",
+            "function": "main"
+        },
+        {
+            "address": "0x7f4e97929d09",
+            "function": "__libc_start_main",
+            "file": {
+                "path": "csu/../csu/libc-start.c",
+                "line": 308,
+                "position": 16
+            }
+        },
+        {
+            "address": "0x4214a9",
+            "function": "_start"
+        }
+    ],
+    [
+        {
+            "type": "region location",
+            "error description": "0x604000003738 is located 0 bytes to the right of 40-byte region [0x604000003710,0x604000003738)"
+        },
         [
             {
-                "type": "sanitizer header",
-                "operation": "READ",
-                "size": "4",
-                "address": "0x614000000040",
+                "event": "allocated",
                 "thread": "T0"
             },
             {
-                "address": "0x5549d3",
-                "function": "uaf(unsigned char const*, unsigned long)",
+                "address": "0x5520dd",
+                "function": "operator new[](unsigned long)"
+            },
+            {
+                "address": "0x554924",
+                "function": "heap_overflow(unsigned char const*, unsigned long)",
                 "file": {
-                    "path": "/mnt/hgfs/f/DSEC/fuzzer/uaf/uaf.cc",
-                    "line": 12,
-                    "position": 12
+                    "path": "/mnt/hgfs/f/DSEC/fuzzer/heap_overflow/hof.cpp",
+                    "line": 8,
+                    "position": 18
                 }
             },
             {
-                "address": "0x554a54",
+                "address": "0x554b34",
                 "function": "LLVMFuzzerTestOneInput",
                 "file": {
-                    "path": "/mnt/hgfs/f/DSEC/fuzzer/uaf/uaf.cc",
-                    "line": 17,
+                    "path": "/mnt/hgfs/f/DSEC/fuzzer/heap_overflow/hof.cpp",
+                    "line": 23,
                     "position": 5
                 }
             },
@@ -41,11 +110,15 @@
                 "function": "fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long)"
             },
             {
-                "address": "0x45cb06",
-                "function": "fuzzer::Fuzzer::ReadAndExecuteSeedCorpora(std::__Fuzzer::vector<fuzzer::SizedFile, fuzzer::fuzzer_allocator<fuzzer::SizedFile> >&)"
+                "address": "0x45add5",
+                "function": "fuzzer::Fuzzer::RunOne(unsigned char const*, unsigned long, bool, fuzzer::InputInfo*, bool*)"
             },
             {
-                "address": "0x45cf79",
+                "address": "0x45c800",
+                "function": "fuzzer::Fuzzer::MutateAndTestOne()"
+            },
+            {
+                "address": "0x45d275",
                 "function": "fuzzer::Fuzzer::Loop(std::__Fuzzer::vector<fuzzer::SizedFile, fuzzer::fuzzer_allocator<fuzzer::SizedFile> >&)"
             },
             {
@@ -57,138 +130,14 @@
                 "function": "main"
             },
             {
-                "address": "0x7f8056e18d09",
+                "address": "0x7f4e97929d09",
                 "function": "__libc_start_main",
                 "file": {
                     "path": "csu/../csu/libc-start.c",
                     "line": 308,
                     "position": 16
                 }
-            },
-            {
-                "address": "0x4214a9",
-                "function": "_start"
             }
-        ],
-        [
-            {
-                "type": "region location",
-                "error description": "0x614000000040 is located 0 bytes inside of 400-byte region [0x614000000040,0x6140000001d0)"
-            },
-            [
-                {
-                    "event": "freed",
-                    "thread": "T0"
-                },
-                {
-                    "address": "0x55292d",
-                    "function": "operator delete[](void*)"
-                },
-                {
-                    "address": "0x55498e",
-                    "function": "uaf(unsigned char const*, unsigned long)",
-                    "file": {
-                        "path": "/mnt/hgfs/f/DSEC/fuzzer/uaf/uaf.cc",
-                        "line": 10,
-                        "position": 5
-                    }
-                },
-                {
-                    "address": "0x554a54",
-                    "function": "LLVMFuzzerTestOneInput",
-                    "file": {
-                        "path": "/mnt/hgfs/f/DSEC/fuzzer/uaf/uaf.cc",
-                        "line": 17,
-                        "position": 5
-                    }
-                },
-                {
-                    "address": "0x45b691",
-                    "function": "fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long)"
-                },
-                {
-                    "address": "0x45cb06",
-                    "function": "fuzzer::Fuzzer::ReadAndExecuteSeedCorpora(std::__Fuzzer::vector<fuzzer::SizedFile, fuzzer::fuzzer_allocator<fuzzer::SizedFile> >&)"
-                },
-                {
-                    "address": "0x45cf79",
-                    "function": "fuzzer::Fuzzer::Loop(std::__Fuzzer::vector<fuzzer::SizedFile, fuzzer::fuzzer_allocator<fuzzer::SizedFile> >&)"
-                },
-                {
-                    "address": "0x44cc85",
-                    "function": "fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long))"
-                },
-                {
-                    "address": "0x4748d2",
-                    "function": "main"
-                },
-                {
-                    "address": "0x7f8056e18d09",
-                    "function": "__libc_start_main",
-                    "file": {
-                        "path": "csu/../csu/libc-start.c",
-                        "line": 308,
-                        "position": 16
-                    }
-                }
-            ],
-            [
-                {
-                    "event": "allocated",
-                    "thread": "T0"
-                },
-                {
-                    "address": "0x5520dd",
-                    "function": "operator new[](unsigned long)"
-                },
-                {
-                    "address": "0x554921",
-                    "function": "uaf(unsigned char const*, unsigned long)",
-                    "file": {
-                        "path": "/mnt/hgfs/f/DSEC/fuzzer/uaf/uaf.cc",
-                        "line": 7,
-                        "position": 18
-                    }
-                },
-                {
-                    "address": "0x554a54",
-                    "function": "LLVMFuzzerTestOneInput",
-                    "file": {
-                        "path": "/mnt/hgfs/f/DSEC/fuzzer/uaf/uaf.cc",
-                        "line": 17,
-                        "position": 5
-                    }
-                },
-                {
-                    "address": "0x45b691",
-                    "function": "fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long)"
-                },
-                {
-                    "address": "0x45cb06",
-                    "function": "fuzzer::Fuzzer::ReadAndExecuteSeedCorpora(std::__Fuzzer::vector<fuzzer::SizedFile, fuzzer::fuzzer_allocator<fuzzer::SizedFile> >&)"
-                },
-                {
-                    "address": "0x45cf79",
-                    "function": "fuzzer::Fuzzer::Loop(std::__Fuzzer::vector<fuzzer::SizedFile, fuzzer::fuzzer_allocator<fuzzer::SizedFile> >&)"
-                },
-                {
-                    "address": "0x44cc85",
-                    "function": "fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long))"
-                },
-                {
-                    "address": "0x4748d2",
-                    "function": "main"
-                },
-                {
-                    "address": "0x7f8056e18d09",
-                    "function": "__libc_start_main",
-                    "file": {
-                        "path": "csu/../csu/libc-start.c",
-                        "line": 308,
-                        "position": 16
-                    }
-                }
-            ]
         ]
     ]
 ]

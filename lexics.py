@@ -85,15 +85,3 @@ def t_error(t):
 t_ignore = '\t'
 
 lexer = lex.lex()
-
-
-# if __name__=="__main__":
-#     data = '''0x0000801d8e70: 00 00 00 00 00 00 00 00 00 00 f9 f9 f9 f9 f9 f9'''
-
-#     lexer.input(data)
-
-#     while True:
-#         tok = lexer.token()
-#         if not tok:
-#             break
-#         print(tok.type, end=' ')

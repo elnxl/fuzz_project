@@ -24,13 +24,6 @@ class ASan:
         self.callstack_summary.append([])
         self.idx += 1
 
-    # def p_fullinfo(self, p):
-    #     '''fullinfo : all_stacktraces SUMMARY NEWLINE SHADOW_FIELD_STR NEWLINE SPACES shadow_field
-    #                 | all_stacktraces SUMMARY'''
-
-    #     p[0] = ''.join(p[1:])
-    #     print(p[0])
-
     def p_all_stacktraces(self, p):
         '''all_stacktraces : error_info error_op callstack location callstack frame_objects_str frame_objects hint
                     | error_info error_op callstack located_region operation callstack
@@ -40,7 +33,6 @@ class ASan:
                     | error_info error_op callstack'''
 
         p[0] = ''.join(p[1:])
-        # print(p[0])
 
     def p_leak_sanitizer(self, p):
         '''leak_sanitizer : error_info leak callstack
@@ -249,31 +241,6 @@ class ASan:
         self.extend_callstack()
         self.callstack_summary[self.idx].append({'type': 'leak', 'size': p[7], 'objects': p[16], 'event': p[23]})
 
-    # def p_shadow_field(self, p):
-    #     '''shadow_field : shadow_addr
-    #                     | shadow_field SPACE NUMBER
-    #                     | shadow_field SPACE ASCII
-    #                     | shadow_field NEWLINE SPACES
-    #                     | shadow_field NEWLINE shadow_addr
-    #                     | shadow_field shadow_addr
-    #                     | shadow_field shadow_byte_current'''
-
-    #     p[0] = ''.join(p[1:])
-
-    # def p_shadow_addr(self, p):
-    #     '''shadow_addr : ADDRESS COLON
-    #                    | EQUAL MORE shadow_addr'''
-
-    #     p[0] = ''.join(p[1:])
-
-    # def p_shadow_byte_current(self, p):
-    #     '''shadow_byte_current : LBRACK NUMBER RBRACK 
-    #                            | LBRACK ASCII RBRACK
-    #                            | shadow_byte_current ASCII
-    #                            | shadow_byte_current NUMBER'''
-
-    #     p[0] = ''.join(p[1:])
-
     def p_error(self, p):
         print('Unexpected token:', p)
 
@@ -303,7 +270,6 @@ class UBSan:
                 | desc'''
         
         p[0] = ''.join(p[1:])
-        # print(p[0])
 
     def p_desc(self, p):
         '''desc : FILENAME COLON NUMBER COLON NUMBER COLON SPACE ERROR_TYPE NEWLINE SPACES
@@ -383,32 +349,3 @@ class UBSan:
 
     def get_info(self):
         return self.callstack_summary
-        
-
-# if __name__=="__main__":
-
-#     data = '''==340714==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x604000003a4c at pc 0x000000554a72 bp 0x7ffcec800bd0 sp 0x7ffcec800bc8
-# READ of size 4 at 0x604000003a4c thread T0
-#     #0 0x554a71 in heap_overflow(unsigned char const*, unsigned long) /mnt/hgfs/f/DSEC/fuzzer/heap_overflow/hof.cpp:14:19
-#     #1 0x554b34 in LLVMFuzzerTestOneInput /mnt/hgfs/f/DSEC/fuzzer/heap_overflow/hof.cpp:23:5
-#     #2 0x45b691 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) (/mnt/hgfs/f/DSEC/fuzzer/heap_overflow/hof+0x45b691)
-#     #3 0x45add5 in fuzzer::Fuzzer::RunOne(unsigned char const*, unsigned long, bool, fuzzer::InputInfo*, bool*) (/mnt/hgfs/f/DSEC/fuzzer/heap_overflow/hof+0x45add5)
-#     #4 0x45c800 in fuzzer::Fuzzer::MutateAndTestOne() (/mnt/hgfs/f/DSEC/fuzzer/heap_overflow/hof+0x45c800)
-#     #5 0x45d275 in fuzzer::Fuzzer::Loop(std::__Fuzzer::vector<fuzzer::SizedFile, fuzzer::fuzzer_allocator<fuzzer::SizedFile> >&) (/mnt/hgfs/f/DSEC/fuzzer/heap_overflow/hof+0x45d275)
-#     #6 0x44cc85 in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) (/mnt/hgfs/f/DSEC/fuzzer/heap_overflow/hof+0x44cc85)
-#     #7 0x4748d2 in main (/mnt/hgfs/f/DSEC/fuzzer/heap_overflow/hof+0x4748d2)
-#     #8 0x7efecdad0d09 in __libc_start_main csu/../csu/libc-start.c:308:16
-#     #9 0x4214a9 in _start (/mnt/hgfs/f/DSEC/fuzzer/heap_overflow/hof+0x4214a9)
-
-# Address 0x604000003a4c is a wild pointer.'''
-
-#     # data = '''Address 0x7fff8f4f1830 is located in stack of thread T0 at offset 432 in frame
-#     # '''
-
-#     # ubsan = UBSan()
-#     # ubsan.parse_data(data)
-#     # print(ubsan.get_info())
-
-#     asan = ASan()
-#     asan.parse_data(data)
-#     print(asan.get_info())

@@ -263,7 +263,7 @@ class UBSan:
         self.path = None
         self.line = None
         self.pos = None
-        self.error_desc = {"file": {"filename": None, "line": None, "position": None}, "error type": None}
+        self.error_desc = {"sanitizer": None, "file": {"filename": None, "line": None, "position": None}, "error type": None}
 
     def p_info(self, p):
         '''info : desc callstack
@@ -278,6 +278,7 @@ class UBSan:
 
         p[0] = ''.join(p[1:])
         
+        self.error_desc['sanitizer'] = 'UndefinedBehaviorSanitizer'
         self.error_desc['file']['filename'] = p[1]
         self.error_desc['file']['line'] = p[3]
         self.error_desc['file']['position'] = p[5]

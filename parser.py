@@ -44,8 +44,6 @@ else:
     log.critical('Unknown sanitizer or incorrect log file!')
     exit()
 
-print(shadow_map)
-
 is_hash = False; is_equal = False
 parse_str = ''
 

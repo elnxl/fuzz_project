@@ -1,0 +1,12 @@
+INFO: Seed: 3686680541
+INFO: Loaded 1 modules   (8 inline 8-bit counters): 8 [0x4eb098, 0x4eb0a0), 
+INFO: Loaded 1 PC tables (8 PCs): 8 [0x4c1070,0x4c10f0), 
+INFO: -max_len is not provided; libFuzzer will not generate inputs larger than 4096 bytes
+INFO: A corpus is not provided, starting from an empty corpus
+bool.cc:12:12: runtime error: load of value 13, which is not a valid value for type 'bool'
+SUMMARY: UndefinedBehaviorSanitizer: undefined-behavior bool.cc:12:12 in 
+MS: 0 ; base unit: 0000000000000000000000000000000000000000
+0xa,
+\x0a
+artifact_prefix='./'; Test unit written to ./crash-adc83b19e793491b1c6ea0fd8b46cd9f32e592fc
+Base64: Cg==

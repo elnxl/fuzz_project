@@ -1,0 +1,11 @@
+INFO: Seed: 3813301349
+INFO: Loaded 1 modules   (5 inline 8-bit counters): 5 [0x4ea080, 0x4ea085), 
+INFO: Loaded 1 PC tables (5 PCs): 5 [0x4c1060,0x4c10b0), 
+INFO: -max_len is not provided; libFuzzer will not generate inputs larger than 4096 bytes
+return.cc:5:5: runtime error: execution reached the end of a value-returning function without returning a value
+SUMMARY: UndefinedBehaviorSanitizer: undefined-behavior return.cc:5:5 in 
+MS: 0 ; base unit: 0000000000000000000000000000000000000000
+
+
+artifact_prefix='./'; Test unit written to ./crash-da39a3ee5e6b4b0d3255bfef95601890afd80709
+Base64: 

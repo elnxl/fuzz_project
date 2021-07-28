@@ -9,12 +9,12 @@ argv[0] = PurePath(argv[0]).name
 
 try:
     if crash:
-        jsonObject = json.load(Path(crash).open())
+        crash_json = json.load(Path(crash).open())
 except ValueError:
     pass
 if not crash:        
     crash = '../path/to/crash'
-    jsonObject = None
+    crash_json = None
 ssh = user or password
 if ssh and not port:
     port = 22
@@ -124,32 +124,45 @@ gdbscript = '''
 # -- Exploit goes here --
 @endif
 
-# EXTARCTED DATA FROM JSON
+# EXTARCTED DATA FROM CRASH
 
-@def print_dict(data):
-@#ignore
-@for key, val in data.items():
-@if key == 'registers state' or key == 'file':
-# [+] @key!s
-    @for key_in, val_in in val.items():
-    # @key_in!s = @val_in!s
+@#FUNCTION TO PRINT DICTIONARY FROM CRASH
+\
+@def print_dict(crash_data):
+@#ignore                                                #//for function work 
+@for key, value in crash_data.items():
+@if key == 'registers state' or key == 'file':          #// in 'registers state' and 'file' dict has multiple values
+# @key!s
+    @for key_inner, value_inner in value.items():
+    # @key_inner!s = @value_inner!s
     @endfor
+@elif key == 'field':                                   #// shadow memory handle
+@for all_shadow_mem in value:
+@for shadow_memory, shadow_bytes in all_shadow_mem.items():
+# @shadow_memory = \
+@for el in shadow_bytes: 
+@el \
+@endfor
+
+@endfor
+@endfor
 @else:
-# @key!s = @val!s
+# @key!s = @value!s
 @endif
 @endfor
 @end
 \
-@def inside (data):
-@#ignore
-@for el in data:
+@#FUNCTION TO PROCESSING CRASH REPORT
+@def crash_process(crash_data):
+@#ignore                                                #//for function work
+@for el in crash_data:
 @(try:)@print_dict(el)
-@#ignore
-@(except AttributeError:)@inside(el)
+@#ignore                                                #// for function work
+@(except AttributeError:)@crash_process(el)
 @endfor
 @end
 \
-@inside(jsonObject)\
+@crash_process(crash_json)\
 \
 io = start()
 

@@ -77,6 +77,12 @@
         {
             "type": "region location",
             "error description": "0x604000003738 is located 0 bytes to the right of 40-byte region [0x604000003710,0x604000003738)"
+        }
+    ],
+    [
+        {
+            "type": "region location",
+            "error description": "0x604000003738 is located 0 bytes to the right of 40-byte region [0x604000003710,0x604000003738)"
         },
         [
             {
@@ -139,5 +145,234 @@
                 }
             }
         ]
-    ]
+    ],
+    {
+        "type": "shadow map",
+        "field": [
+            {
+                "0x0c087fff8690": [
+                    "fa",
+                    "fa",
+                    "fd",
+                    "fd",
+                    "fd",
+                    "fd",
+                    "fd",
+                    "fa",
+                    "fa",
+                    "fa",
+                    "fd",
+                    "fd",
+                    "fd",
+                    "fd",
+                    "fd",
+                    "fa"
+                ]
+            },
+            {
+                "0x0c087fff86a0": [
+                    "fa",
+                    "fa",
+                    "fd",
+                    "fd",
+                    "fd",
+                    "fd",
+                    "fd",
+                    "fa",
+                    "fa",
+                    "fa",
+                    "fd",
+                    "fd",
+                    "fd",
+                    "fd",
+                    "fd",
+                    "fa"
+                ]
+            },
+            {
+                "0x0c087fff86b0": [
+                    "fa",
+                    "fa",
+                    "fd",
+                    "fd",
+                    "fd",
+                    "fd",
+                    "fd",
+                    "fa",
+                    "fa",
+                    "fa",
+                    "fd",
+                    "fd",
+                    "fd",
+                    "fd",
+                    "fd",
+                    "fa"
+                ]
+            },
+            {
+                "0x0c087fff86c0": [
+                    "fa",
+                    "fa",
+                    "fd",
+                    "fd",
+                    "fd",
+                    "fd",
+                    "fd",
+                    "fa",
+                    "fa",
+                    "fa",
+                    "fd",
+                    "fd",
+                    "fd",
+                    "fd",
+                    "fd",
+                    "fa"
+                ]
+            },
+            {
+                "0x0c087fff86d0": [
+                    "fa",
+                    "fa",
+                    "fd",
+                    "fd",
+                    "fd",
+                    "fd",
+                    "fd",
+                    "fa",
+                    "fa",
+                    "fa",
+                    "fd",
+                    "fd",
+                    "fd",
+                    "fd",
+                    "fd",
+                    "fa"
+                ]
+            },
+            {
+                "0x0c087fff86e0": [
+                    "fa",
+                    "fa",
+                    "00",
+                    "00",
+                    "00",
+                    "00",
+                    "00",
+                    "[fa]",
+                    "fa",
+                    "fa",
+                    "fa",
+                    "fa",
+                    "fa",
+                    "fa",
+                    "fa",
+                    "fa"
+                ]
+            },
+            {
+                "0x0c087fff86f0": [
+                    "fa",
+                    "fa",
+                    "fa",
+                    "fa",
+                    "fa",
+                    "fa",
+                    "fa",
+                    "fa",
+                    "fa",
+                    "fa",
+                    "fa",
+                    "fa",
+                    "fa",
+                    "fa",
+                    "fa",
+                    "fa"
+                ]
+            },
+            {
+                "0x0c087fff8700": [
+                    "fa",
+                    "fa",
+                    "fa",
+                    "fa",
+                    "fa",
+                    "fa",
+                    "fa",
+                    "fa",
+                    "fa",
+                    "fa",
+                    "fa",
+                    "fa",
+                    "fa",
+                    "fa",
+                    "fa",
+                    "fa"
+                ]
+            },
+            {
+                "0x0c087fff8710": [
+                    "fa",
+                    "fa",
+                    "fa",
+                    "fa",
+                    "fa",
+                    "fa",
+                    "fa",
+                    "fa",
+                    "fa",
+                    "fa",
+                    "fa",
+                    "fa",
+                    "fa",
+                    "fa",
+                    "fa",
+                    "fa"
+                ]
+            },
+            {
+                "0x0c087fff8720": [
+                    "fa",
+                    "fa",
+                    "fa",
+                    "fa",
+                    "fa",
+                    "fa",
+                    "fa",
+                    "fa",
+                    "fa",
+                    "fa",
+                    "fa",
+                    "fa",
+                    "fa",
+                    "fa",
+                    "fa",
+                    "fa"
+                ]
+            },
+            {
+                "0x0c087fff8730": [
+                    "fa",
+                    "fa",
+                    "fa",
+                    "fa",
+                    "fa",
+                    "fa",
+                    "fa",
+                    "fa",
+                    "fa",
+                    "fa",
+                    "fa",
+                    "fa",
+                    "fa",
+                    "fa",
+                    "fa",
+                    "fa"
+                ]
+            }
+        ]
+    },
+    {
+        "type": "crash input",
+        "value": "\\n\\n\\n\\n\\n\\x00'"
+    }
 ]

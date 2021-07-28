@@ -27,12 +27,12 @@ gdbscript = '''
 #                    EXPLOIT GOES HERE
 #===========================================================
 
-# EXTARCTED DATA FROM JSON
+# EXTARCTED DATA FROM CRASH
 
 # sanitizer = AddressSanitizer
 # error type = heap-buffer-overflow
 # error address = 0x604000003738
-# [+] registers state
+# registers state
     # pc = 0x000000554a72
     # bp = 0x7ffe9f593480
     # sp = 0x7ffe9f593478
@@ -45,14 +45,14 @@ gdbscript = '''
 
 # address = 0x554a71
 # function = heap_overflow(unsigned char const*, unsigned long)
-# [+] file
+# file
     # path = /mnt/hgfs/f/DSEC/fuzzer/heap_overflow/hof.cpp
     # line = 14
     # position = 19
 
 # address = 0x554b34
 # function = LLVMFuzzerTestOneInput
-# [+] file
+# file
     # path = /mnt/hgfs/f/DSEC/fuzzer/heap_overflow/hof.cpp
     # line = 23
     # position = 5
@@ -77,7 +77,7 @@ gdbscript = '''
 
 # address = 0x7f4e97929d09
 # function = __libc_start_main
-# [+] file
+# file
     # path = csu/../csu/libc-start.c
     # line = 308
     # position = 16
@@ -101,14 +101,14 @@ gdbscript = '''
 
 # address = 0x554924
 # function = heap_overflow(unsigned char const*, unsigned long)
-# [+] file
+# file
     # path = /mnt/hgfs/f/DSEC/fuzzer/heap_overflow/hof.cpp
     # line = 8
     # position = 18
 
 # address = 0x554b34
 # function = LLVMFuzzerTestOneInput
-# [+] file
+# file
     # path = /mnt/hgfs/f/DSEC/fuzzer/heap_overflow/hof.cpp
     # line = 23
     # position = 5
@@ -133,7 +133,7 @@ gdbscript = '''
 
 # address = 0x7f4e97929d09
 # function = __libc_start_main
-# [+] file
+# file
     # path = csu/../csu/libc-start.c
     # line = 308
     # position = 16
@@ -141,7 +141,17 @@ gdbscript = '''
 
 
 # type = shadow map
-# field = [{'0x0c087fff8690': ['fa', 'fa', 'fd', 'fd', 'fd', 'fd', 'fd', 'fa', 'fa', 'fa', 'fd', 'fd', 'fd', 'fd', 'fd', 'fa']}, {'0x0c087fff86a0': ['fa', 'fa', 'fd', 'fd', 'fd', 'fd', 'fd', 'fa', 'fa', 'fa', 'fd', 'fd', 'fd', 'fd', 'fd', 'fa']}, {'0x0c087fff86b0': ['fa', 'fa', 'fd', 'fd', 'fd', 'fd', 'fd', 'fa', 'fa', 'fa', 'fd', 'fd', 'fd', 'fd', 'fd', 'fa']}, {'0x0c087fff86c0': ['fa', 'fa', 'fd', 'fd', 'fd', 'fd', 'fd', 'fa', 'fa', 'fa', 'fd', 'fd', 'fd', 'fd', 'fd', 'fa']}, {'0x0c087fff86d0': ['fa', 'fa', 'fd', 'fd', 'fd', 'fd', 'fd', 'fa', 'fa', 'fa', 'fd', 'fd', 'fd', 'fd', 'fd', 'fa']}, {'0x0c087fff86e0': ['fa', 'fa', '00', '00', '00', '00', '00', '[fa]', 'fa', 'fa', 'fa', 'fa', 'fa', 'fa', 'fa', 'fa']}, {'0x0c087fff86f0': ['fa', 'fa', 'fa', 'fa', 'fa', 'fa', 'fa', 'fa', 'fa', 'fa', 'fa', 'fa', 'fa', 'fa', 'fa', 'fa']}, {'0x0c087fff8700': ['fa', 'fa', 'fa', 'fa', 'fa', 'fa', 'fa', 'fa', 'fa', 'fa', 'fa', 'fa', 'fa', 'fa', 'fa', 'fa']}, {'0x0c087fff8710': ['fa', 'fa', 'fa', 'fa', 'fa', 'fa', 'fa', 'fa', 'fa', 'fa', 'fa', 'fa', 'fa', 'fa', 'fa', 'fa']}, {'0x0c087fff8720': ['fa', 'fa', 'fa', 'fa', 'fa', 'fa', 'fa', 'fa', 'fa', 'fa', 'fa', 'fa', 'fa', 'fa', 'fa', 'fa']}, {'0x0c087fff8730': ['fa', 'fa', 'fa', 'fa', 'fa', 'fa', 'fa', 'fa', 'fa', 'fa', 'fa', 'fa', 'fa', 'fa', 'fa', 'fa']}]
+# 0x0c087fff8690 = fa fa fd fd fd fd fd fa fa fa fd fd fd fd fd fa 
+# 0x0c087fff86a0 = fa fa fd fd fd fd fd fa fa fa fd fd fd fd fd fa 
+# 0x0c087fff86b0 = fa fa fd fd fd fd fd fa fa fa fd fd fd fd fd fa 
+# 0x0c087fff86c0 = fa fa fd fd fd fd fd fa fa fa fd fd fd fd fd fa 
+# 0x0c087fff86d0 = fa fa fd fd fd fd fd fa fa fa fd fd fd fd fd fa 
+# 0x0c087fff86e0 = fa fa 00 00 00 00 00 [fa] fa fa fa fa fa fa fa fa 
+# 0x0c087fff86f0 = fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa 
+# 0x0c087fff8700 = fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa 
+# 0x0c087fff8710 = fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa 
+# 0x0c087fff8720 = fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa 
+# 0x0c087fff8730 = fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa 
 
 # type = crash input
 # value = \n\n\n\n\n\x00'
